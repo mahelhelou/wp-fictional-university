@@ -24,3 +24,7 @@
   - `header` & `footer` files
   - add `styles` and `scripts`
   - avoid `cache`
+- `05 Pages`
+  - adding interior pages
+  - Navigate to child pages
+  - Menus feature in wordpress
