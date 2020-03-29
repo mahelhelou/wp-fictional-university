@@ -1,1 +1,0 @@
-This is the about us content. Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias fuga libero quod dolorum odit! Id, ipsam, unde ipsa obcaecati eaque porro quod recusandae earum cum impedit nam eum nobis consequatur quidem reprehenderit labore amet deleniti facilis ab! Atque, beatae incidunt?

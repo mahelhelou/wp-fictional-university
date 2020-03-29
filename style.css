@@ -2371,3 +2371,9 @@ body.admin-bar .search-overlay {
   border-bottom: none;
   margin-bottom: 0;
 }
+
+
+/* My edits */
+.current-menu-item {
+  border-bottom: 3px solid yellow;
+}

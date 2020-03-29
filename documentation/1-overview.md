@@ -28,3 +28,15 @@
   - adding interior pages
   - Navigate to child pages
   - Menus feature in wordpress
+- `06 Building the Blog Section`
+  - blog listing page, front-page vs. index.php page
+  - blog archive
+  - custom queries
+- `07 Workflow and Automation`
+- `08 Events Post Type`
+  - custom post type
+  - displaying custom post types
+  - custom fields
+  - ordering/sorting custom queries using custom fields
+  - manipulating default URLs based queries
+  - past events page (custom query pagination)
