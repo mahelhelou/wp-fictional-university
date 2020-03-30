@@ -6,7 +6,7 @@
       <h1 class="headline headline--large">Welcome!</h1>
       <h2 class="headline headline--medium">We think you&rsquo;ll like it here.</h2>
       <h3 class="headline headline--small">Why don&rsquo;t you check out the <strong>major</strong> you&rsquo;re interested in?</h3>
-      <a href="#" class="btn btn--large btn--blue">Find Your Major</a>
+      <a href="<?php echo get_post_type_archive_link( 'program' ); ?>" class="btn btn--large btn--blue">Find Your Major</a>
     </div>
   </div>
 
@@ -16,6 +16,7 @@
         <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
         <?php
+          // This custom query is also used in single-program.php to show upcoming events for (this or current or viewed) program, with an extra filter
           $today = date( 'Ymd' );
           $homePageEvents = new WP_Query( array(
             'post_type' => 'event',
@@ -25,6 +26,7 @@
             'orderby' => 'meta_value_num',
             'order' => 'ASC', // DESC, ASC
             'meta_query' => array(
+              // Think of array as a filter that returns something you specifiy
               // Only show events that are greater than today date
               array(
                 'key' => 'event_date',
