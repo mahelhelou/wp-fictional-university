@@ -40,3 +40,7 @@
   - ordering/sorting custom queries using custom fields
   - manipulating default URLs based queries
   - past events page (custom query pagination)
+- `09 Programs Post Type`
+  - creating relationship between contents (programs and events)
+  - displaying the relationships on front-end
+-

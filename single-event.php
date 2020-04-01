@@ -2,8 +2,10 @@
 
 <?php
    while( have_posts() ) {
-      the_post(); ?>
-      <div class="page-banner">
+      the_post();
+      pageBanner(); // no $args needed
+      ?>
+      <!-- <div class="page-banner">
          <div class="page-banner__bg-image"
             style="background-image: url(<?php echo get_theme_file_uri( '/images/ocean.jpg' ); ?>);"></div>
          <div class="page-banner__content container container--narrow">
@@ -12,7 +14,7 @@
                <p>DON'T FORGET TO MAKE MY DYNAMTIC LATOR ON!</p>
             </div>
          </div>
-      </div>
+      </div> -->
 
       <div class="container container--narrow page-section">
          <div class="metabox metabox--position-up metabox--with-home-link">
@@ -33,7 +35,7 @@
 
             if ( $relatedPrograms ) {
                echo '<hr class="section-break">';
-               echo '<h2 class="headline headline--medium">Related Programs</h2>';
+               echo '<h2 class="headline headline--medium">Related Program(s)</h2>';
                echo '<ul class="link-list min-list">';
                foreach( $relatedPrograms as $program ) { ?>
                   <!-- // Each item in the array is a Post Object -->
