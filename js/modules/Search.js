@@ -7,6 +7,7 @@ import $ from 'jquery'
 class Search {
   // 1. Describe and create/initiate our object
   constructor() { // Any code place here will be excuted once you create an object using the class blueprint
+    this.addSearchHTML() // called first to be accessed
     this.searchOverlay = $(".search-overlay")
     this.openButton = $(".js-search-trigger")
     this.closeButton = $(".search-overlay__close")
@@ -34,6 +35,9 @@ class Search {
     this.searchOverlay.addClass('search-overlay--active')
     // Remove scroll when the search overlay is open
     $('body').addClass('body-no-scroll') // (UX)
+    this.searchFiled.val('') // (UX) delete last searched results
+    // this.searchFiled.focus() // (UX) autoFocus of input
+    setTimeout(() =>  this.searchFiled.focus(), 301) // Wait until the fadeIn search transiton completed
     // console.log('Our open methos is just ran') // (TEST)
     this.isSearchOpen = true
   }
@@ -70,7 +74,7 @@ class Search {
           // this.typingTimer = setTimeout(function () {console.log('Test timeout')}, 2000) // (TEST)
         } // to prevent re-starting the loader
 
-          this.typingTimer = setTimeout(this.getResults.bind(this), 2000) // (TEST)
+          this.typingTimer = setTimeout(this.getResults.bind(this), 750) // (TEST)
       } else {
         this.resultsDiv.html('')
         this.isSpinnerVisible = false
@@ -81,8 +85,40 @@ class Search {
   }
 
   getResults() {
-    this.resultsDiv.html('Imagine that some content goes here...') // (TEST)
-    this.isSpinnerVisible = false
+    // Using asynchronous requests
+    $.when(
+      $.getJSON(fictionalUniversityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchFiled.val()),
+      $.getJSON(fictionalUniversityData.root_url + '/wp-json/wp/v2/pages?search=' + this.searchFiled.val())
+    ).then((posts, pages) => {
+      let combinedResults = posts[0].concat(pages[0])
+        this.resultsDiv.html(`
+          <h2 class="search-overlay__section-title">General Information</h2>
+          ${combinedResults.length ? '<ul class="link-list min-list">' : '<p>No general information matches your search.'}
+            ${combinedResults.map(post => `<li><a href="${post.link}">${post.title.rendered}</a></li>`)}
+          ${combinedResults.length ? '</ul>' : ''}
+        `)
+        this.isSpinnerVisible = false
+    }, () => {
+        this.resultsDiv.html('<p>Unexpected error! Please try again.</p>')
+    })
+  }
+
+  addSearchHTML() {
+    $('body').append(`
+    <div class="search-overlay">
+      <div class="search-overlay__top">
+        <div class="container">
+          <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+          <input type="text" class="search-term" placeholder="What are you looking for?" id="search-term">
+          <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+        </div>
+      </div>
+
+      <div class="container">
+        <div id="search-overlay__results"></div>
+      </div>
+    </div>
+    `)
   }
 }
 
