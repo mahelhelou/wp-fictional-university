@@ -1,5 +1,6 @@
 # Overview of The Course
 
+
 1. Install WordPress locally
    - `Local by Flywheel`
    - `Vagrant with Virtual Box`
@@ -43,4 +44,18 @@
 - `09 Programs Post Type`
   - creating relationship between contents (programs and events)
   - displaying the relationships on front-end
--
+- `10 Professors Post Type`
+  - professor post type
+  - featured image (post thumbnial)
+  - featured image sizes and cropping the image
+  - page banner dynamic background
+- `11 Cleaner Code (Less Duplication)`
+  - reduce code duplicate - create our own function (page banner)
+  - get_template_part()
+  - use pageBanner() function
+- `12 Campus Post Type`
+  - campus post type
+  - campus map on front-end
+  - other details
+- `13 Live Search (UI JavaScript)`
+  - live search

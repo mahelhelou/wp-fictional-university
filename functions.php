@@ -132,6 +132,22 @@ function fictional_university_post_types() {
    ),
    'menu_icon' => 'dashicons-welcome-learn-more'
    ) );
+
+   // Campus p ost type
+   register_post_type( 'campus', array(
+      'supports' => array( 'title', 'editor', 'excerpt' ),
+      'rewrite' => array( 'slug' => 'campuses' ),
+      'has_archive' => true,
+      'public' => true,
+      'labels' => array(
+      'name' => 'Campuses',
+      'add_new_item' => 'Add New Campus',
+      'edit_item' => 'Edit Campus',
+      'all_items' => 'All Campuses',
+      'singular_name' => 'Campus'
+      ),
+      'menu_icon' => 'dashicons-location-alt'
+   ) );
 }
 
 add_action( 'init', 'fictional_university_post_types' );
@@ -165,3 +181,12 @@ function fictional_university_adjust_query( $query ) {
 }
 
 add_action( 'pre_get_posts', 'fictional_university_adjust_query' );
+
+// Add API Key
+function fictional_university_api_key( $api ) {
+   // $api[ 'key' ] = 'AIzaSyC1YrXh25wcrvknWQaF7dNWEDD2ATDzXFE';
+   $api[ 'key' ] = 'AIzaSyCMZ9-DGyNDrT7MvFAYhuaTZnq-XYDyl7g';
+   return $api;
+}
+
+add_filter( 'acf/fields/google_map/api', 'fictional_university_api_key' );
