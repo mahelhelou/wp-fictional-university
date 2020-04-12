@@ -1,5 +1,11 @@
 # WORDPRESS API
 
+## 4 reasons why we are creating our custom our own new REST API URL
+1. More advanced custom search logic
+2. Respond with less JSON data, we get only what wee specified (UX, loads faster for visitors)
+3. Send only 1 getJSON request for all post types instead of 6 getJSON (in this theme, there are 6 post types)
+4. Perfect exercise for sharpnening PHP skills
+
 - To grab the content from DB, javascipt doesn't do anything
 - Fetching 10 recent posts: `http://localhost:3000/wp-json/wp/v2/posts`
 - Fetching 10 recent pages: `http://localhost:3000/wp-json/wp/v2/pages`j

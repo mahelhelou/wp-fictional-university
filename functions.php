@@ -1,4 +1,7 @@
 <?php
+
+require get_theme_file_path( 'inc/search-route.php' );
+
 /**
  * pageBanner function VS. get_template_part() function
  * if you want to make something more dynamic with $args, use function
@@ -129,6 +132,7 @@ function fictional_university_post_types() {
 
    // Professor post type
    register_post_type( 'professor', array(
+   'show_in_rest' => true,
    'supports' => array( 'title', 'editor', 'thumbnail' ),
    'public' => true,
    'labels' => array(
@@ -198,3 +202,16 @@ function fictional_university_api_key( $api ) {
 }
 
 add_filter( 'acf/fields/google_map/api', 'fictional_university_api_key' );
+
+// Customizing REST API
+function fictional_university_custom_rest() {
+   // Add author name to posts, rendered in Search.js file. Add a new field to REST API
+   register_rest_field( 'post', 'authorName', array(
+      // 'get_callback' => function () { return 'Super amazing author name'; }
+      'get_callback' => function () { return get_author_name(); }
+   ) );
+
+   // You can add custom fields to REST API as many as you want
+}
+
+add_action( 'rest_api_init', 'fictional_university_custom_rest' );
