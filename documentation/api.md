@@ -1,6 +1,7 @@
 # WORDPRESS API
 
 ## 4 reasons why we are creating our custom our own new REST API URL
+
 1. More advanced custom search logic
 2. Respond with less JSON data, we get only what wee specified (UX, loads faster for visitors)
 3. Send only 1 getJSON request for all post types instead of 6 getJSON (in this theme, there are 6 post types)
@@ -47,5 +48,30 @@ getResults() {
       }) // (url, func), you can use .bind(this) @ the end of func
       // map is used to create a new version of original array. Runs once for each item
     })
+}
+```
+
+## Ready and complete API Request using WP core REST API
+
+- We deleted this code because we built our own api
+
+```js
+getResults() {
+  // Using asynchronous requests
+  $.when(
+    $.getJSON(fictionalUniversityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchFiled.val()),
+    $.getJSON(fictionalUniversityData.root_url + '/wp-json/wp/v2/pages?search=' + this.searchFiled.val())
+  ).then((posts, pages) => {
+    let combinedResults = posts[0].concat(pages[0])
+      this.resultsDiv.html(`
+        <h2 class="search-overlay__section-title">General Information</h2>
+        ${combinedResults.length ? '<ul class="link-list min-list">' : '<p>No general information matches your search.'}
+          ${combinedResults.map(post => `<li><a href="${post.link}">${post.title.rendered}</a> ${post.type == 'post' ? `by ${post.authorName}` : ''}</li>`).join('')}
+        ${combinedResults.length ? '</ul>' : ''}
+      `)
+      this.isSpinnerVisible = false
+  }, () => {
+      this.resultsDiv.html('<p>Unexpected error! Please try again.</p>')
+  })
 }
 ```

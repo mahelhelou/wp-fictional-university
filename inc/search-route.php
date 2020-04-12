@@ -42,7 +42,9 @@ function fictional_university_search_results( $data ) {
       array_push( $results[ 'generalInfo' ], array(
         'title' => get_the_title(),
         'url' => get_the_permalink(),
-        'ID' => get_the_ID()
+        'ID' => get_the_ID(),
+        'postType' => get_post_type(),
+        'authorName' => get_the_author()
       ) );
     }
 
@@ -50,7 +52,8 @@ function fictional_university_search_results( $data ) {
       array_push( $results[ 'professors' ], array(
         'title' => get_the_title(),
         'url' => get_the_permalink(),
-        'ID' => get_the_ID()
+        'ID' => get_the_ID(),
+        'image' => get_the_post_thumbnail_url( 0, 'professor-landscape' ) // 0 = current post
       ) );
     }
 
@@ -71,10 +74,22 @@ function fictional_university_search_results( $data ) {
     }
 
     if ( get_post_type() == 'event') {
+      $eventDate = new DateTime( get_field( 'event_date' ) );
+      $description = null;
+
+      if ( has_excerpt() ) {
+        $description = get_the_excerpt();
+      } else {
+        $description = wp_trim_words( get_the_content(), 18 );
+      }
+
       array_push( $results[ 'events' ], array(
         'title' => get_the_title(),
         'url' => get_the_permalink(),
-        'ID' => get_the_ID()
+        'ID' => get_the_ID(),
+        'month' => $eventDate->format( 'M' ),
+        'day' => $eventDate->format( 'd' ),
+        'description' => $description
       ) );
     }
   }
