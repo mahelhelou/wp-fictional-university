@@ -22,7 +22,9 @@
                <span class="metabox__main"><?php the_title(); ?></span></p>
          </div>
 
-         <div class="generic-content"><?php the_content(); ?></div>
+         <!-- <div class="generic-content"><?php the_content(); ?></div> -->
+         <!-- To prevent search_overlay from outputing body content related to other program. For example, if we search for 'Math' and in the bioloty program body content 'The biology works with Math closely', the result of search will output Biology program and it's professors. This is not what we want! -->
+         <div class="generic-content"><?php the_field( 'main_body_content' ); ?></div>
 
          <!-- Linking upcoming events to viewed program, but without creating another 'Related Events' custom field group, use front-page.php already built custom query -->
          <?php
@@ -98,8 +100,20 @@
 
             }
           }
-            // Maybe required once not twice!
-            // wp_reset_postdata();
+            wp_reset_postdata();
+
+            $relatedCampuses = get_field( 'related_campus' );
+
+            if ( $relatedCampuses ) {
+              echo '<hr class="section-break">';
+              echo '<h2 class="headline headline--medium">' . get_the_title() . ' is Available At These Campuses!</h2>';
+
+              echo '<ul class="min-list link-list">';
+              foreach ( $relatedCampuses as $campus ) {
+                ?> <li><a href="<?php echo get_the_permalink( $campus ); ?>"><?php echo get_the_title( $campus ); ?></a></li> <?php
+              }
+              echo '</ul>';
+            }
         ?>
       </div>
 
