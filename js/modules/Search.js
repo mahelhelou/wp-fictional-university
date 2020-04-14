@@ -40,6 +40,7 @@ class Search {
     setTimeout(() =>  this.searchFiled.focus(), 301) // Wait until the fadeIn search transiton completed
     // console.log('Our open methos is just ran') // (TEST)
     this.isSearchOpen = true
+    return false // prevent default behaviour of <a> tag
   }
 
   closeOverlay() {
