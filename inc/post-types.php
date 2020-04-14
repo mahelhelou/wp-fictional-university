@@ -4,6 +4,8 @@
 function fictional_university_post_types() {
   // Event post type
   register_post_type( 'event', array(
+  'capability_type' => 'event', // def: 'post', to give unique previliges
+  'map_meta_cap' => true,
   'supports' => array( 'title', 'editor', 'excerpt' ), // for custom fields
   'rewrite' => array( 'slug' => 'events' ), // this is to make events archive as '/events' NOT 'event'
   'has_archive' => true, // To act like a blog of all posts
@@ -51,6 +53,8 @@ function fictional_university_post_types() {
 
   // Campus p ost type
   register_post_type( 'campus', array(
+      'capability_type' => 'campus', // def: 'post', to give previliges
+      'map_meta_cap' => true,
      'supports' => array( 'title', 'editor', 'excerpt' ),
      'rewrite' => array( 'slug' => 'campuses' ),
      'has_archive' => true,

@@ -8,3 +8,5 @@ require get_theme_file_path( 'inc/post-types.php' );
 require get_theme_file_path( 'inc/adjust-query.php' );
 require get_theme_file_path( 'inc/api-key.php' );
 require get_theme_file_path( 'inc/rest-api.php' );
+require get_theme_file_path( 'inc/subscriber-case.php' );
+require get_theme_file_path( 'inc/custom-login.php' );
