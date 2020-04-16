@@ -16,6 +16,7 @@ function fictional_university_assets() {
   // View page source, scroll very down. You'll see these info
   wp_localize_script( 'fictional-university-scripts', 'fictionalUniversityData', array(
      'root_url' => get_site_url(),
+     'nonce' => wp_create_nonce( 'wp_rest' ), // secret for user session to perform CRUD operations on DB
      // 'sky' => 'blue',
      // 'grass' => 'green'
   ) );
