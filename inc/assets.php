@@ -1,4 +1,14 @@
 <?php
+  /**
+   * Add custom font
+   * Add font-awesome lib
+   * Load main styles
+   * Load main scripts
+   * Versioning and avoiding browser cache
+   */
+?>
+
+<?php
 
 // Load Fictional University Assets
 function fictional_university_assets() {
