@@ -16,37 +16,39 @@
 </div> -->
 
 <div class="container container--narrow page-section">
-<?php
-   $today = date( 'Ymd' );
-   $pastEvents = new WP_Query( array(
-     'post_type' => 'event',
-      // 'posts_per_page' => 1, // for pagination purposes
-     'paged' => get_query_var( 'paged', 1 ),
-     'meta_key' => 'event_date',
-     // [title, post_date, rand for ajax idea] // -1 for all posts
-     'orderby' => 'meta_value_num',
-     'order' => 'ASC', // DESC, ASC
-     'meta_query' => array(
-       // Only show events that are greater than today date
-       array(
-         'key' => 'event_date',
-         'compare' => '<',
-         'value' => $today,
-         'type' => 'numeric'
-       )
-     )
-   ) );
+  <?php
+    $today = date( 'Ymd' );
+    $pastEvents = new WP_Query( array(
+      'post_type' => 'event',
+      // 'posts_per_page' => 1, // To test pagination
+      'paged' => get_query_var( 'paged', 1 ),
+      'meta_key' => 'event_date',
+      'orderby' => 'meta_value_num',
+      'order' => 'ASC', // DESC, ASC
+      'meta_query' => array(
+        // Only show events that are greater than today date
+        array(
+          'key' => 'event_date',
+          'compare' => '<',
+          'value' => $today,
+          'type' => 'numeric'
+        )
+      )
+    ) );
 
-  while( $pastEvents->have_posts() ) {
-    $pastEvents->the_post();
-    get_template_part( 'template-parts/content-event' );
-  }
+    while( $pastEvents->have_posts() ) {
+      $pastEvents->the_post();
+      get_template_part( 'template-parts/content-event' );
+    }
 
-  // This works only for default query, and we need to customize it for $pageEvents pagination
-  echo paginate_links( array(
-     'total' => $pastEvents->max_num_pages
-  ) );
-?>
+    /**
+     * The default pagination function works only for default WP Query,
+     * And we need to customize it for $pastEvents pagination
+     */
+    echo paginate_links( array(
+      'total' => $pastEvents->max_num_pages
+    ) );
+  ?>
 </div>
 
 <?php get_footer(); ?>
